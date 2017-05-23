@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,4 +18,12 @@ const sharedModules: any[] = [
     exports: sharedModules
 })
 
-export class SharedModule { }
+export class SharedModule { 
+    static forRoot(): ModuleWithProviders{ 
+        return {
+            ngModule: SharedModule,
+            providers: [
+            ]
+        }
+    }
+ }

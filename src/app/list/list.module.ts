@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ListRoutingModule } from './list-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './list.component';
-
+import { TestComponent } from './test/test.component';
 import { LocalizationModule, TranslationService } from 'angular-l10n';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { LocalizationModule, TranslationService } from 'angular-l10n';
         SharedModule,
         //LocalizationModule.forChild() // New instance of TranslationService.
     ],
-    declarations: [ListComponent]
+    declarations: [ListComponent, TestComponent]
 })
 export class ListModule {
 

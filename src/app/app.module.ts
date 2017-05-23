@@ -12,42 +12,7 @@ import { ValidationComponent } from './validation/validation.component';
 
 import { LocalizationModule, LocaleValidationModule, LocaleService, TranslationService } from 'angular-l10n';
 
-// Advanced initialization.
-@Injectable()
-export class LocalizationConfig {
 
-    constructor(public locale: LocaleService, public translation: TranslationService) { }
-
-    load(): Promise<any> {
-        this.locale.addConfiguration()
-            .addLanguage('en', 'ltr')
-            .addLanguage('it', 'ltr')
-            .addLanguage('ar', 'rtl')
-            .setCookieExpiration(30)
-            .defineDefaultLocale('en', 'US')
-            .defineCurrency('USD');
-        this.locale.init();
-
-        this.translation.addConfiguration()
-            .addProvider('./src/assets/locale-');
-
-        const promise: Promise<any> = new Promise((resolve: any) => {
-            this.translation.translationChanged.subscribe(() => {
-                resolve(true);
-            });
-        });
-
-        this.translation.init();
-
-        return promise;
-    }
-
-}
-
-// AoT compilation requires a reference to an exported function.
-export function initLocalization(localizationConfig: LocalizationConfig): Function {
-    return () => localizationConfig.load();
-}
 
 // APP_INITIALIZER will execute the function when the app is initialized and delay what it provides.
 @NgModule({
@@ -55,7 +20,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        SharedModule,
+        SharedModule.forRoot(),
         LocalizationModule.forRoot(), // New instance of LocaleService & TranslationService.
         LocaleValidationModule.forRoot()
     ],
@@ -66,15 +31,30 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         ValidationComponent
     ],
     providers: [
-        Title,
-        LocalizationConfig,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initLocalization,
-            deps: [LocalizationConfig],
-            multi: true
-        }
+        Title
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(locale: LocaleService, translation: TranslationService){
+        locale.addConfiguration()
+            .addLanguage('en', 'ltr')
+            .addLanguage('it', 'ltr')
+            .addLanguage('ar', 'rtl')
+            .setCookieExpiration(30)
+            .defineDefaultLocale('en', 'US')
+            .defineCurrency('USD');
+        locale.init();
+
+        translation.addConfiguration()
+            .addProvider('./src/assets/locale-');
+
+        const promise: Promise<any> = new Promise((resolve: any) => {
+            translation.translationChanged.subscribe(() => {
+                resolve(true);
+            });
+        });
+
+        translation.init();
+    }
+ }
