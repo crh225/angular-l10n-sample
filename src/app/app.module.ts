@@ -47,13 +47,16 @@ export class AppModule {
         locale.init();
 
         translation.addConfiguration()
-            .addProvider('./src/assets/locale-');
+            .addProvider('./src/assets/locale-')
+            .addProvider('./src/assets/locale-list-')
+            .addProvider('./src/assets/locale-position-');
 
         const promise: Promise<any> = new Promise((resolve: any) => {
             translation.translationChanged.subscribe(() => {
                 resolve(true);
             });
         });
+
 
         translation.init();
     }

@@ -13,7 +13,7 @@ import {
 
 @Component({
     selector: 'test',
-    template: 'This Should translate: {{ Accountant | translate:lang }}',
+    template: `This Should translate: {{ 'Accountant' | translate:lang }}`,
     viewProviders: [Collator]
 })
 export class TestComponent implements OnInit, OnDestroy {
