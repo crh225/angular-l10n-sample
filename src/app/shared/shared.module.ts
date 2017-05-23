@@ -3,13 +3,14 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
-
+import { LocalizationModule } from 'angular-l10n';
 const sharedModules: any[] = [
     HttpModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    LocalizationModule
 ];
 
 @NgModule({

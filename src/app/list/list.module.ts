@@ -10,17 +10,17 @@ import { LocalizationModule, TranslationService } from 'angular-l10n';
     imports: [
         ListRoutingModule,
         SharedModule,
-        LocalizationModule.forChild() // New instance of TranslationService.
+        //LocalizationModule.forChild() // New instance of TranslationService.
     ],
     declarations: [ListComponent]
 })
 export class ListModule {
 
     constructor(public translation: TranslationService) {
-        this.translation.addConfiguration()
-            .addProvider('./src/assets/locale-list-')
-            .addProvider('./src/assets/locale-position-');
-        this.translation.init();
+         //this.translation.addConfiguration()
+         //   .addProvider('./src/assets/locale-list-')
+         //   .addProvider('./src/assets/locale-position-');
+         //this.translation.init();
     }
 
 }
