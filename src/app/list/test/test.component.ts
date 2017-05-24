@@ -13,8 +13,7 @@ import {
 
 @Component({
     selector: 'test',
-    template: `This Should translate: {{ 'Accountant' | translate:lang }}`,
-    viewProviders: [Collator]
+    template: `This Should translate: {{ 'Accountant' | translate:lang }}`
 })
 export class TestComponent implements OnInit, OnDestroy {
 
@@ -23,7 +22,7 @@ export class TestComponent implements OnInit, OnDestroy {
     @Currency() currency: string;
 
 
-    constructor(public translation: TranslationService, private collator: Collator) { }
+    constructor() { }
 
     ngOnInit(): void {
     }
